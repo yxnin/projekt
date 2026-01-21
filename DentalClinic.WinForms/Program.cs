@@ -5,6 +5,7 @@ using DentalClinic.Core.Patterns;
 using DentalClinic.Core.Services;
 using DentalClinic.Infrastructure.Data;
 using DentalClinic.Infrastructure.Repositories;
+using DentalClinic.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,6 +37,9 @@ internal static class Program
                 services.AddScoped<IDentistService, DentistService>();
                 services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
                 services.AddScoped<IAppointmentService, AppointmentService>();
+
+                // Serwis odczytu wizyt z Include + DTO
+                services.AddScoped<IAppointmentReadService, AppointmentReadService>();
 
                 // Mediator
                 services.AddScoped<IClinicMediator, ClinicMediator>();

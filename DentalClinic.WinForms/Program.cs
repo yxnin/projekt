@@ -1,4 +1,5 @@
 using DentalClinic.Core.Interfaces.Repositories;
+using DentalClinic.Core.Interfaces.Services;
 using DentalClinic.Infrastructure.Data;
 using DentalClinic.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace DentalClinic.WinForms;
+
 
 internal static class Program
 {

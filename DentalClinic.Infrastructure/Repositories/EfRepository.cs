@@ -26,12 +26,11 @@ public class EfRepository<T> : IRepository<T> where T : EntityBase
     public Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate, CancellationToken ct = default) =>
         _set.Where(predicate).ToListAsync(ct);
 
-    public async Task AddAsync(T entity, CancellationToken ct = default)
-    {
-        await _set.AddAsync(entity, ct);
-    }
+    public Task AddAsync(T entity, CancellationToken ct = default) =>
+        _set.AddAsync(entity, ct).AsTask();
 
     public void Update(T entity) => _set.Update(entity);
+
     public void Remove(T entity) => _set.Remove(entity);
 
     public Task<int> SaveChangesAsync(CancellationToken ct = default) =>

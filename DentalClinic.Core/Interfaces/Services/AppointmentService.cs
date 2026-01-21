@@ -1,6 +1,7 @@
 ﻿using DentalClinic.Core.Entities;
 using DentalClinic.Core.Interfaces.Repositories;
 using DentalClinic.Core.Interfaces.Services;
+using DentalClinic.Core.Patterns;
 
 namespace DentalClinic.Core.Services;
 
@@ -38,16 +39,15 @@ public class AppointmentService : IAppointmentService
         if (startUtc.Kind != DateTimeKind.Utc)
             startUtc = DateTime.SpecifyKind(startUtc, DateTimeKind.Utc);
 
-        // Kolizje: overlap (prostą logiką) dla Scheduled
         var endUtc = startUtc.AddMinutes(service.DurationMinutes);
 
+        // Kolizje (prosto): inne scheduled wizyty tego dentysty
         var existing = await _appointments.FindAsync(a =>
             a.DentistId == dentistId &&
             a.Status == AppointmentStatus.Scheduled, ct);
 
         foreach (var a in existing)
         {
-            // jeśli brakuje Service nawigacji, przyjmij 30min jako fallback
             var otherService = await _services.GetByIdAsync(a.ServiceCatalogItemId, ct);
             var otherDuration = otherService?.DurationMinutes > 0 ? otherService.DurationMinutes : 30;
 
@@ -79,6 +79,12 @@ public class AppointmentService : IAppointmentService
 
     public Task<List<Appointment>> GetAllAsync(CancellationToken ct = default) =>
         _appointments.ListAsync(ct);
+
+    public Task<List<Appointment>> GetFilteredAsync(string? filterText, CancellationToken ct = default)
+    {
+        var filter = AppointmentFilterParser.Parse(filterText);
+        return _appointments.FindAsync(filter.ToExpression(), ct);
+    }
 
     public async Task CancelAsync(int id, CancellationToken ct = default)
     {

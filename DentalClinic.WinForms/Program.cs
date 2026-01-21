@@ -46,6 +46,9 @@ internal static class Program
         {
             var db = scope.ServiceProvider.GetRequiredService<DentalClinicDbContext>();
             db.Database.Migrate();
+
+            // Seed danych (idempotentny)
+            DbSeeder.SeedAsync(db).GetAwaiter().GetResult();
         }
 
         ApplicationConfiguration.Initialize();

@@ -1,8 +1,7 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using DentalClinic.Core.Entities;
+﻿using DentalClinic.Core.Entities;
 using DentalClinic.Core.Interfaces.Repositories;
 using DentalClinic.Core.Interfaces.Services;
+using DentalClinic.Core.Security;
 
 namespace DentalClinic.Core.Services;
 
@@ -55,42 +54,5 @@ public class AuthService : IAuthService
         if (user is null) return null;
 
         return PasswordHasher.Verify(password, user.PasswordHash) ? user : null;
-    }
-
-    private static class PasswordHasher
-    {
-        // zapis: saltHex:hashHex
-        public static string Hash(string password)
-        {
-            var salt = RandomNumberGenerator.GetBytes(16);
-            var hash = Sha256(Combine(salt, Encoding.UTF8.GetBytes(password)));
-            return $"{Convert.ToHexString(salt)}:{Convert.ToHexString(hash)}";
-        }
-
-        public static bool Verify(string password, string stored)
-        {
-            var parts = stored.Split(':');
-            if (parts.Length != 2) return false;
-
-            var salt = Convert.FromHexString(parts[0]);
-            var expected = Convert.FromHexString(parts[1]);
-
-            var actual = Sha256(Combine(salt, Encoding.UTF8.GetBytes(password)));
-            return CryptographicOperations.FixedTimeEquals(expected, actual);
-        }
-
-        private static byte[] Sha256(byte[] data)
-        {
-            using var sha = SHA256.Create();
-            return sha.ComputeHash(data);
-        }
-
-        private static byte[] Combine(byte[] a, byte[] b)
-        {
-            var r = new byte[a.Length + b.Length];
-            Buffer.BlockCopy(a, 0, r, 0, a.Length);
-            Buffer.BlockCopy(b, 0, r, a.Length, b.Length);
-            return r;
-        }
     }
 }

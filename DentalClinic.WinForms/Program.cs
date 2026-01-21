@@ -1,4 +1,6 @@
+using DentalClinic.Core.Interfaces.Repositories;
 using DentalClinic.Infrastructure.Data;
+using DentalClinic.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +18,9 @@ internal static class Program
                 // EF Core
                 services.AddDbContext<DentalClinicDbContext>(opt =>
                     opt.UseSqlite("Data Source=dentalclinic.db"));
+
+                // Repozytorium generyczne
+                services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
                 // Singleton (wymagany wzorzec)
                 services.AddSingleton<AppSession>();
@@ -37,7 +42,6 @@ internal static class Program
         }
 
         ApplicationConfiguration.Initialize();
-        var mainForm = host.Services.GetRequiredService<MainForm>();
-        Application.Run(mainForm);
+        Application.Run(host.Services.GetRequiredService<MainForm>());
     }
 }

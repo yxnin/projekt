@@ -1,5 +1,8 @@
+using DentalClinic.Core.Interfaces.Patterns;
 using DentalClinic.Core.Interfaces.Repositories;
 using DentalClinic.Core.Interfaces.Services;
+using DentalClinic.Core.Patterns;
+using DentalClinic.Core.Services;
 using DentalClinic.Infrastructure.Data;
 using DentalClinic.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace DentalClinic.WinForms;
-
 
 internal static class Program
 {
@@ -17,26 +19,29 @@ internal static class Program
         var host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
-                // EF Core
                 services.AddDbContext<DentalClinicDbContext>(opt =>
                     opt.UseSqlite("Data Source=dentalclinic.db"));
 
-                // Repozytorium generyczne
                 services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
-                // Singleton (wymagany wzorzec)
                 services.AddSingleton<AppSession>();
 
-                // Rejestracja form
+                // Formy
                 services.AddTransient<MainForm>();
                 services.AddTransient<LoginForm>();
 
-                // TODO: serwisy domenowe
-                // services.AddScoped<IAuthService, AuthService>();
+                // Serwisy domenowe
+                services.AddScoped<IAuthService, AuthService>();
+                services.AddScoped<IPatientService, PatientService>();
+                services.AddScoped<IDentistService, DentistService>();
+                services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
+                services.AddScoped<IAppointmentService, AppointmentService>();
+
+                // Mediator
+                services.AddScoped<IClinicMediator, ClinicMediator>();
             })
             .Build();
 
-        // migracje na starcie (opcjonalnie)
         using (var scope = host.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<DentalClinicDbContext>();

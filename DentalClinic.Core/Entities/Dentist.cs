@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalClinic.Core.Entities
+namespace DentalClinic.Core.Entities;
+
+public class Dentist : Person
 {
-    public class Dentist
-    {
-    }
+    public string Specialization { get; set; } = "";
 }

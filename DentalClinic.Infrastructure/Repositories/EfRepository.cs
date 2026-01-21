@@ -30,7 +30,6 @@ public class EfRepository<T> : IRepository<T> where T : EntityBase
         _set.AddAsync(entity, ct).AsTask();
 
     public void Update(T entity) => _set.Update(entity);
-
     public void Remove(T entity) => _set.Remove(entity);
 
     public Task<int> SaveChangesAsync(CancellationToken ct = default) =>

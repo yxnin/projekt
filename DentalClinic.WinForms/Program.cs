@@ -26,7 +26,6 @@ internal static class Program
                     opt.UseSqlite("Data Source=dentalclinic.db"));
 
                 services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-
                 services.AddSingleton<AppSession>();
 
                 services.AddScoped<IAuthService, AuthService>();
@@ -47,9 +46,12 @@ internal static class Program
                 services.AddTransient<AppointmentsForm>();
                 services.AddTransient<AppointmentCreateForm>();
 
-                // NOWE: Dentyści
                 services.AddTransient<DentistsForm>();
                 services.AddTransient<DentistEditForm>();
+
+                // NOWE: Usługi
+                services.AddTransient<ServicesForm>();
+                services.AddTransient<ServiceEditForm>();
             })
             .Build();
 

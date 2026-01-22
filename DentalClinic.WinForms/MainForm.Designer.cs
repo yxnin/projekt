@@ -7,6 +7,7 @@
         private System.Windows.Forms.Button btnPatients;
         private System.Windows.Forms.Button btnAppointments;
         private System.Windows.Forms.Button btnDentists;
+        private System.Windows.Forms.Button btnServices;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblStatus;
 
@@ -22,6 +23,7 @@
             this.btnPatients = new System.Windows.Forms.Button();
             this.btnAppointments = new System.Windows.Forms.Button();
             this.btnDentists = new System.Windows.Forms.Button();
+            this.btnServices = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -56,22 +58,32 @@
             this.btnDentists.UseVisualStyleBackColor = true;
             this.btnDentists.Click += new System.EventHandler(this.btnDentists_Click);
             // 
+            // btnServices
+            // 
+            this.btnServices.Location = new System.Drawing.Point(24, 192);
+            this.btnServices.Name = "btnServices";
+            this.btnServices.Size = new System.Drawing.Size(200, 45);
+            this.btnServices.TabIndex = 3;
+            this.btnServices.Text = "Usługi";
+            this.btnServices.UseVisualStyleBackColor = true;
+            this.btnServices.Click += new System.EventHandler(this.btnServices_Click);
+            // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(24, 192);
+            this.btnLogin.Location = new System.Drawing.Point(24, 248);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(200, 45);
-            this.btnLogin.TabIndex = 3;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(24, 255);
+            this.lblStatus.Location = new System.Drawing.Point(24, 315);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(820, 23);
-            this.lblStatus.TabIndex = 4;
+            this.lblStatus.TabIndex = 5;
             this.lblStatus.Text = "Not logged in";
             // 
             // MainForm
@@ -81,6 +93,7 @@
             this.ClientSize = new System.Drawing.Size(900, 500);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.btnServices);
             this.Controls.Add(this.btnDentists);
             this.Controls.Add(this.btnAppointments);
             this.Controls.Add(this.btnPatients);

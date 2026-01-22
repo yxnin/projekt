@@ -3,23 +3,23 @@ using DentalClinic.Core.Interfaces.Services;
 
 namespace DentalClinic.WinForms;
 
-public partial class DentistsForm : Form
+public partial class ServicesForm : Form
 {
-    private readonly IDentistService? _dentistService;
+    private readonly IServiceCatalogService? _serviceCatalog;
     private readonly AppSession? _session;
 
-    public DentistsForm()
+    public ServicesForm()
     {
         InitializeComponent();
     }
 
-    public DentistsForm(IDentistService dentistService, AppSession session) : this()
+    public ServicesForm(IServiceCatalogService serviceCatalog, AppSession session) : this()
     {
-        _dentistService = dentistService;
+        _serviceCatalog = serviceCatalog;
         _session = session;
     }
 
-    private async void DentistsForm_Shown(object sender, EventArgs e)
+    private async void ServicesForm_Shown(object sender, EventArgs e)
     {
         ApplyPermissions();
         await ReloadAsync();
@@ -38,14 +38,14 @@ public partial class DentistsForm : Form
 
     private async void btnAdd_Click(object sender, EventArgs e)
     {
-        if (_dentistService is null) return;
+        if (_serviceCatalog is null) return;
 
-        using var dlg = new DentistEditForm();
+        using var dlg = new ServiceEditForm();
         if (dlg.ShowDialog(this) != DialogResult.OK) return;
 
         try
         {
-            await _dentistService.CreateAsync(dlg.Result);
+            await _serviceCatalog.CreateAsync(dlg.Result);
             await ReloadAsync();
         }
         catch (Exception ex)
@@ -56,17 +56,17 @@ public partial class DentistsForm : Form
 
     private async void btnEdit_Click(object sender, EventArgs e)
     {
-        if (_dentistService is null) return;
+        if (_serviceCatalog is null) return;
 
         var selected = GetSelected();
         if (selected is null) return;
 
-        using var dlg = new DentistEditForm(selected);
+        using var dlg = new ServiceEditForm(selected);
         if (dlg.ShowDialog(this) != DialogResult.OK) return;
 
         try
         {
-            await _dentistService.UpdateAsync(dlg.Result);
+            await _serviceCatalog.UpdateAsync(dlg.Result);
             await ReloadAsync();
         }
         catch (Exception ex)
@@ -77,7 +77,7 @@ public partial class DentistsForm : Form
 
     private async void btnDelete_Click(object sender, EventArgs e)
     {
-        if (_dentistService is null) return;
+        if (_serviceCatalog is null) return;
 
         var isAdmin = _session?.CurrentUser?.Role == "Admin";
         if (!isAdmin)
@@ -90,13 +90,13 @@ public partial class DentistsForm : Form
         var selected = GetSelected();
         if (selected is null) return;
 
-        if (MessageBox.Show($"Delete dentist #{selected.Id}?", "Confirm",
+        if (MessageBox.Show($"Delete service #{selected.Id}?", "Confirm",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             return;
 
         try
         {
-            await _dentistService.DeleteAsync(selected.Id);
+            await _serviceCatalog.DeleteAsync(selected.Id);
             await ReloadAsync();
         }
         catch (Exception ex)
@@ -105,20 +105,20 @@ public partial class DentistsForm : Form
         }
     }
 
-    private Dentist? GetSelected()
+    private ServiceCatalogItem? GetSelected()
     {
-        if (gridDentists.CurrentRow?.DataBoundItem is Dentist d)
-            return d;
+        if (gridServices.CurrentRow?.DataBoundItem is ServiceCatalogItem s)
+            return s;
 
-        MessageBox.Show("Select a dentist first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Select a service first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         return null;
     }
 
     private async Task ReloadAsync()
     {
-        if (_dentistService is null) return;
+        if (_serviceCatalog is null) return;
 
-        var data = await _dentistService.GetAllAsync();
-        gridDentists.DataSource = data;
+        var data = await _serviceCatalog.GetAllAsync();
+        gridServices.DataSource = data;
     }
 }

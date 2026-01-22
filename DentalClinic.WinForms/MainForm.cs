@@ -40,6 +40,13 @@ public partial class MainForm : Form
         form.ShowDialog(this);
     }
 
+    private void btnServices_Click(object sender, EventArgs e)
+    {
+        if (_sp is null) return;
+        using var form = _sp.GetRequiredService<ServicesForm>();
+        form.ShowDialog(this);
+    }
+
     private void btnLogin_Click(object sender, EventArgs e)
     {
         if (_sp is null) return;
@@ -56,6 +63,7 @@ public partial class MainForm : Form
             btnPatients.Enabled = false;
             btnAppointments.Enabled = false;
             btnDentists.Enabled = false;
+            btnServices.Enabled = false;
             return;
         }
 
@@ -63,5 +71,6 @@ public partial class MainForm : Form
         btnPatients.Enabled = true;
         btnAppointments.Enabled = true;
         btnDentists.Enabled = true;
+        btnServices.Enabled = true;
     }
 }

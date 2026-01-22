@@ -6,20 +6,29 @@ namespace DentalClinic.WinForms;
 public partial class PatientsForm : Form
 {
     private readonly IPatientService? _patientService;
+    private readonly AppSession? _session;
 
     public PatientsForm()
     {
         InitializeComponent();
     }
 
-    public PatientsForm(IPatientService patientService) : this()
+    public PatientsForm(IPatientService patientService, AppSession session) : this()
     {
         _patientService = patientService;
+        _session = session;
     }
 
     private async void PatientsForm_Shown(object sender, EventArgs e)
     {
+        ApplyPermissions();
         await ReloadAsync();
+    }
+
+    private void ApplyPermissions()
+    {
+        var isAdmin = _session?.CurrentUser?.Role == "Admin";
+        btnDelete.Enabled = isAdmin;
     }
 
     private async void btnRefresh_Click(object sender, EventArgs e)
@@ -69,6 +78,14 @@ public partial class PatientsForm : Form
     private async void btnDelete_Click(object sender, EventArgs e)
     {
         if (_patientService is null) return;
+
+        var isAdmin = _session?.CurrentUser?.Role == "Admin";
+        if (!isAdmin)
+        {
+            MessageBox.Show("Only Admin can delete.", "Access denied",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
 
         var selected = GetSelected();
         if (selected is null) return;

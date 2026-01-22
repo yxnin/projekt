@@ -2,38 +2,91 @@
 {
     partial class MainForm
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private System.Windows.Forms.Button btnPatients;
+        private System.Windows.Forms.Button btnAppointments;
+        private System.Windows.Forms.Button btnDentists;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblStatus;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Form1";
+            this.btnPatients = new System.Windows.Forms.Button();
+            this.btnAppointments = new System.Windows.Forms.Button();
+            this.btnDentists = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // btnPatients
+            // 
+            this.btnPatients.Location = new System.Drawing.Point(24, 24);
+            this.btnPatients.Name = "btnPatients";
+            this.btnPatients.Size = new System.Drawing.Size(200, 45);
+            this.btnPatients.TabIndex = 0;
+            this.btnPatients.Text = "Pacjenci";
+            this.btnPatients.UseVisualStyleBackColor = true;
+            this.btnPatients.Click += new System.EventHandler(this.btnPatients_Click);
+            // 
+            // btnAppointments
+            // 
+            this.btnAppointments.Location = new System.Drawing.Point(24, 80);
+            this.btnAppointments.Name = "btnAppointments";
+            this.btnAppointments.Size = new System.Drawing.Size(200, 45);
+            this.btnAppointments.TabIndex = 1;
+            this.btnAppointments.Text = "Wizyty";
+            this.btnAppointments.UseVisualStyleBackColor = true;
+            this.btnAppointments.Click += new System.EventHandler(this.btnAppointments_Click);
+            // 
+            // btnDentists
+            // 
+            this.btnDentists.Location = new System.Drawing.Point(24, 136);
+            this.btnDentists.Name = "btnDentists";
+            this.btnDentists.Size = new System.Drawing.Size(200, 45);
+            this.btnDentists.TabIndex = 2;
+            this.btnDentists.Text = "Dentyści";
+            this.btnDentists.UseVisualStyleBackColor = true;
+            this.btnDentists.Click += new System.EventHandler(this.btnDentists_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(24, 192);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(200, 45);
+            this.btnLogin.TabIndex = 3;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Location = new System.Drawing.Point(24, 255);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(820, 23);
+            this.lblStatus.TabIndex = 4;
+            this.lblStatus.Text = "Not logged in";
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(900, 500);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.btnDentists);
+            this.Controls.Add(this.btnAppointments);
+            this.Controls.Add(this.btnPatients);
+            this.Name = "MainForm";
+            this.Text = "DentalClinic";
+            this.ResumeLayout(false);
         }
-
-        #endregion
     }
 }

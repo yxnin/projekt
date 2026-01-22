@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Remove="dentalclinic.db" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DentalClinic.Core\DentalClinic.Core.csproj" />
     <ProjectReference Include="..\DentalClinic.Infrastructure\DentalClinic.Infrastructure.csproj" />
   </ItemGroup>

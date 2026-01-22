@@ -1,4 +1,4 @@
-using DentalClinic.Core.Interfaces.Patterns;
+﻿using DentalClinic.Core.Interfaces.Patterns;
 using DentalClinic.Core.Interfaces.Repositories;
 using DentalClinic.Core.Interfaces.Services;
 using DentalClinic.Core.Patterns;
@@ -14,6 +14,8 @@ namespace DentalClinic.WinForms;
 
 internal static class Program
 {
+    public static IServiceProvider ServiceProvider { get; private set; } = default!;
+
     [STAThread]
     static void Main()
     {
@@ -27,31 +29,36 @@ internal static class Program
 
                 services.AddSingleton<AppSession>();
 
-                // Formy
-                services.AddTransient<MainForm>();
-                services.AddTransient<LoginForm>();
-
-                // Serwisy domenowe
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IPatientService, PatientService>();
                 services.AddScoped<IDentistService, DentistService>();
                 services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
                 services.AddScoped<IAppointmentService, AppointmentService>();
 
-                // Serwis odczytu wizyt z Include + DTO
                 services.AddScoped<IAppointmentReadService, AppointmentReadService>();
-
-                // Mediator
                 services.AddScoped<IClinicMediator, ClinicMediator>();
+
+                services.AddTransient<MainForm>();
+                services.AddTransient<LoginForm>();
+
+                services.AddTransient<PatientsForm>();
+                services.AddTransient<PatientEditForm>();
+
+                services.AddTransient<AppointmentsForm>();
+                services.AddTransient<AppointmentCreateForm>();
+
+                // NOWE: Dentyści
+                services.AddTransient<DentistsForm>();
+                services.AddTransient<DentistEditForm>();
             })
             .Build();
+
+        ServiceProvider = host.Services;
 
         using (var scope = host.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<DentalClinicDbContext>();
             db.Database.Migrate();
-
-            // Seed danych (idempotentny)
             DbSeeder.SeedAsync(db).GetAwaiter().GetResult();
         }
 

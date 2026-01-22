@@ -12,4 +12,7 @@ public interface IAppointmentService
     Task<List<Appointment>> GetFilteredAsync(string? filterText, CancellationToken ct = default);
 
     Task CancelAsync(int id, CancellationToken ct = default);
+
+    // NOWE: oznacz wizytę jako wykonaną
+    Task MarkDoneAsync(int id, CancellationToken ct = default);
 }

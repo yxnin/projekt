@@ -41,7 +41,6 @@ public class AppointmentService : IAppointmentService
 
         var endUtc = startUtc.AddMinutes(service.DurationMinutes);
 
-        // Kolizje (prosto): inne scheduled wizyty tego dentysty
         var existing = await _appointments.FindAsync(a =>
             a.DentistId == dentistId &&
             a.Status == AppointmentStatus.Scheduled, ct);
@@ -91,7 +90,23 @@ public class AppointmentService : IAppointmentService
         var appt = await _appointments.GetByIdAsync(id, ct);
         if (appt is null) return;
 
+        if (appt.Status == AppointmentStatus.Done)
+            throw new ArgumentException("Cannot cancel a completed appointment.");
+
         appt.Status = AppointmentStatus.Cancelled;
+        _appointments.Update(appt);
+        await _appointments.SaveChangesAsync(ct);
+    }
+
+    public async Task MarkDoneAsync(int id, CancellationToken ct = default)
+    {
+        var appt = await _appointments.GetByIdAsync(id, ct);
+        if (appt is null) return;
+
+        if (appt.Status == AppointmentStatus.Cancelled)
+            throw new ArgumentException("Cannot complete a cancelled appointment.");
+
+        appt.Status = AppointmentStatus.Done;
         _appointments.Update(appt);
         await _appointments.SaveChangesAsync(ct);
     }

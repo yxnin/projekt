@@ -27,8 +27,17 @@ public partial class DentistsForm : Form
 
     private void ApplyPermissions()
     {
-        var isAdmin = _session?.CurrentUser?.Role == "Admin";
+        var role = _session?.CurrentUser?.Role;
+
+        // Tylko Admin może modyfikować dentystów
+        var isAdmin = role == UserRoles.Admin;
+
+        btnAdd.Enabled = isAdmin;
+        btnEdit.Enabled = isAdmin;
         btnDelete.Enabled = isAdmin;
+
+        // Refresh może każdy
+        btnRefresh.Enabled = true;
     }
 
     private async void btnRefresh_Click(object sender, EventArgs e)
@@ -39,6 +48,7 @@ public partial class DentistsForm : Form
     private async void btnAdd_Click(object sender, EventArgs e)
     {
         if (_dentistService is null) return;
+        if (_session?.CurrentUser?.Role != UserRoles.Admin) return;
 
         using var dlg = new DentistEditForm();
         if (dlg.ShowDialog(this) != DialogResult.OK) return;
@@ -57,6 +67,7 @@ public partial class DentistsForm : Form
     private async void btnEdit_Click(object sender, EventArgs e)
     {
         if (_dentistService is null) return;
+        if (_session?.CurrentUser?.Role != UserRoles.Admin) return;
 
         var selected = GetSelected();
         if (selected is null) return;
@@ -78,14 +89,7 @@ public partial class DentistsForm : Form
     private async void btnDelete_Click(object sender, EventArgs e)
     {
         if (_dentistService is null) return;
-
-        var isAdmin = _session?.CurrentUser?.Role == "Admin";
-        if (!isAdmin)
-        {
-            MessageBox.Show("Only Admin can delete.", "Access denied",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
+        if (_session?.CurrentUser?.Role != UserRoles.Admin) return;
 
         var selected = GetSelected();
         if (selected is null) return;
@@ -120,5 +124,9 @@ public partial class DentistsForm : Form
 
         var data = await _dentistService.GetAllAsync();
         gridDentists.DataSource = data;
+
+        // User ma widzieć specjalizację, imię, nazwisko (reszta opcjonalnie)
+        if (gridDentists.Columns.Contains("CreatedUtc"))
+            gridDentists.Columns["CreatedUtc"].Visible = false;
     }
 }

@@ -38,6 +38,35 @@ public static class DbSeeder
             );
         }
 
+        // Przykładowy user z powiązanym pacjentem (RODO panel usera)
+        if (!await db.Users.AnyAsync(u => u.Email == "user@clinic.local", ct))
+        {
+            // upewnij się, że pacjent istnieje
+            var patient = await db.Patients.FirstOrDefaultAsync(p => p.FirstName == "User" && p.LastName == "Demo", ct);
+            if (patient is null)
+            {
+                patient = new Patient
+                {
+                    FirstName = "User",
+                    LastName = "Demo",
+                    Phone = "600000000",
+                    BirthDate = new DateOnly(2001, 1, 1)
+                };
+                db.Patients.Add(patient);
+                await db.SaveChangesAsync(ct);
+            }
+
+            db.Users.Add(new User
+            {
+                Email = "user@clinic.local",
+                PasswordHash = PasswordHasher.Hash("User123!"),
+                Role = UserRoles.User,
+                PatientId = patient.Id
+            });
+
+            await db.SaveChangesAsync(ct);
+        }
+
         // Patients
         if (!await db.Patients.AnyAsync(ct))
         {

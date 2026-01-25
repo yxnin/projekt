@@ -1,4 +1,4 @@
-﻿using DentalClinic.Core.Entities;
+﻿using DentalClinic.WinForms.UiCommands;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalClinic.WinForms;
@@ -7,63 +7,32 @@ public partial class MainForm : Form
 {
     private readonly IServiceProvider? _sp;
     private readonly AppSession? _session;
+    private readonly UiCommandFactory? _factory;
 
     public MainForm()
     {
         InitializeComponent();
     }
 
-    public MainForm(IServiceProvider sp, AppSession session) : this()
+    public MainForm(IServiceProvider sp, AppSession session, UiCommandFactory factory) : this()
     {
         _sp = sp;
         _session = session;
+        _factory = factory;
         RefreshStatusAndAccess();
     }
 
-    private bool IsAdmin => _session?.CurrentUser?.Role == UserRoles.Admin;
+    private void btnPatients_Click(object sender, EventArgs e) => ExecuteNav(NavigationTarget.Patients);
+    private void btnAppointments_Click(object sender, EventArgs e) => ExecuteNav(NavigationTarget.Appointments);
+    private void btnDentists_Click(object sender, EventArgs e) => ExecuteNav(NavigationTarget.Dentists);
+    private void btnServices_Click(object sender, EventArgs e) => ExecuteNav(NavigationTarget.Services);
+    private void btnMyAppointments_Click(object sender, EventArgs e) => ExecuteNav(NavigationTarget.MyAppointments);
 
-    private void btnPatients_Click(object sender, EventArgs e)
+    private void ExecuteNav(NavigationTarget target)
     {
-        if (_sp is null) return;
-
-        if (!IsAdmin)
-        {
-            MessageBox.Show("Brak dostępu (RODO).", "Access denied",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-
-        using var form = _sp.GetRequiredService<PatientsForm>();
-        form.ShowDialog(this);
-    }
-
-    private void btnAppointments_Click(object sender, EventArgs e)
-    {
-        if (_sp is null) return;
-
-        if (!IsAdmin)
-        {
-            MessageBox.Show("Brak dostępu (RODO).", "Access denied",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-
-        using var form = _sp.GetRequiredService<AppointmentsForm>();
-        form.ShowDialog(this);
-    }
-
-    private void btnDentists_Click(object sender, EventArgs e)
-    {
-        if (_sp is null) return;
-        using var form = _sp.GetRequiredService<DentistsForm>();
-        form.ShowDialog(this);
-    }
-
-    private void btnServices_Click(object sender, EventArgs e)
-    {
-        if (_sp is null) return;
-        using var form = _sp.GetRequiredService<ServicesForm>();
-        form.ShowDialog(this);
+        if (_sp is null || _session is null || _factory is null) return;
+        var cmd = _factory.Create(target, _sp, _session, this);
+        cmd.Execute();
     }
 
     private void btnLogin_Click(object sender, EventArgs e)
@@ -74,25 +43,38 @@ public partial class MainForm : Form
             RefreshStatusAndAccess();
     }
 
+    private void btnLogout_Click(object sender, EventArgs e)
+    {
+        if (_session is null) return;
+
+        _session.SignOut();
+        RefreshStatusAndAccess();
+    }
+
     private void RefreshStatusAndAccess()
     {
-        if (_session?.CurrentUser is null)
+        var user = _session?.CurrentUser;
+
+        if (user is null)
         {
             lblStatus.Text = "Not logged in";
             btnPatients.Enabled = false;
             btnAppointments.Enabled = false;
             btnDentists.Enabled = false;
             btnServices.Enabled = false;
+            btnMyAppointments.Enabled = false;
+            btnLogout.Enabled = false;
             return;
         }
 
-        lblStatus.Text = $"Logged in as: {_session.CurrentUser.Email} (Role: {_session.CurrentUser.Role})";
+        lblStatus.Text = $"Logged in as: {user.Email} (Role: {user.Role})";
 
-        // zwykły user: może widzieć Dentystów i Usługi, ale NIE Pacjentów i Wizyt
-        btnPatients.Enabled = IsAdmin;
-        btnAppointments.Enabled = IsAdmin;
-
+        // faktyczne zasady dostępu są w UiCommandFactory; tu tylko UX
+        btnPatients.Enabled = true;
+        btnAppointments.Enabled = true;
         btnDentists.Enabled = true;
         btnServices.Enabled = true;
+        btnMyAppointments.Enabled = true;
+        btnLogout.Enabled = true;
     }
 }

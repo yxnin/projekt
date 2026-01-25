@@ -55,4 +55,16 @@ public class AuthService : IAuthService
 
         return PasswordHasher.Verify(password, user.PasswordHash) ? user : null;
     }
+
+    public async Task LinkPatientAsync(int userId, int patientId, CancellationToken ct = default)
+    {
+        if (userId <= 0) throw new ArgumentException("UserId is required.");
+        if (patientId <= 0) throw new ArgumentException("PatientId is required.");
+
+        var user = await _users.GetByIdAsync(userId, ct) ?? throw new ArgumentException("User not found.");
+        user.PatientId = patientId;
+
+        _users.Update(user);
+        await _users.SaveChangesAsync(ct);
+    }
 }

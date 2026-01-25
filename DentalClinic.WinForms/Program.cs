@@ -6,6 +6,8 @@ using DentalClinic.Core.Services;
 using DentalClinic.Infrastructure.Data;
 using DentalClinic.Infrastructure.Repositories;
 using DentalClinic.Infrastructure.Services;
+using DentalClinic.WinForms.Reports;
+using DentalClinic.WinForms.UiCommands;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,36 +24,59 @@ internal static class Program
         var host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
+                // EF Core
                 services.AddDbContext<DentalClinicDbContext>(opt =>
                     opt.UseSqlite("Data Source=dentalclinic.db"));
 
+                // Repo
                 services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+                // Singleton session
                 services.AddSingleton<AppSession>();
 
+                // Serwisy domenowe
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IPatientService, PatientService>();
                 services.AddScoped<IDentistService, DentistService>();
                 services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
                 services.AddScoped<IAppointmentService, AppointmentService>();
 
+                // Read service + mediator
                 services.AddScoped<IAppointmentReadService, AppointmentReadService>();
                 services.AddScoped<IClinicMediator, ClinicMediator>();
 
+                // Simple Factory
+                services.AddSingleton<UiCommandFactory>();
+
+                // Abstract Factory: raporty (MUSI BYĆ transient/scoped, NIE singleton)
+                services.AddTransient<IAppointmentReportFactory, TxtAppointmentReportFactory>();
+                services.AddTransient<IAppointmentReportFactory, JsonAppointmentReportFactory>();
+
+                // Formy
                 services.AddTransient<MainForm>();
                 services.AddTransient<LoginForm>();
 
                 services.AddTransient<PatientsForm>();
                 services.AddTransient<PatientEditForm>();
 
-                services.AddTransient<AppointmentsForm>();
-                services.AddTransient<AppointmentCreateForm>();
-
                 services.AddTransient<DentistsForm>();
                 services.AddTransient<DentistEditForm>();
 
-                // NOWE: Usługi
                 services.AddTransient<ServicesForm>();
                 services.AddTransient<ServiceEditForm>();
+
+                services.AddTransient<AppointmentsForm>();
+                services.AddTransient<AppointmentCreateForm>();
+
+                // Panel usera
+                services.AddTransient<UserAppointmentsForm>();
+                services.AddTransient<UserAppointmentCreateForm>();
+
+                // Rejestracja z danymi pacjenta
+                services.AddTransient<RegisterPatientForm>();
+
+                services.AddTransient<RegisterForm>();
+
             })
             .Build();
 

@@ -1,5 +1,6 @@
 ﻿using DentalClinic.Core.Entities;
 using DentalClinic.Core.Interfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalClinic.WinForms;
 
@@ -11,11 +12,10 @@ public partial class LoginForm : Form
     public LoginForm()
     {
         InitializeComponent();
-
-        // Pod seed:
-        tbEmail.Text = "admin@clinic.local";
-        tbPassword.Text = "Admin123!";
+        tbEmail.Text = "";
+        tbPassword.Text = "";
     }
+
 
     public LoginForm(IAuthService auth, AppSession session) : this()
     {
@@ -49,25 +49,15 @@ public partial class LoginForm : Form
         }
     }
 
-    private async void btnRegister_Click(object sender, EventArgs e)
+    private void btnRegister_Click(object sender, EventArgs e)
     {
-        if (_auth is null || _session is null) return;
-
-        var email = tbEmail.Text.Trim();
-        var pass = tbPassword.Text;
-
-        try
+        using var reg = Program.ServiceProvider.GetRequiredService<RegisterForm>();
+        if (reg.ShowDialog(this) == DialogResult.OK)
         {
-            var user = await _auth.RegisterAsync(email, pass, UserRoles.User);
-            _session.SignIn(user);
-
-            MessageBox.Show("Registered and logged in.", "Register", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
     }
+
+
 }

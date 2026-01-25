@@ -9,4 +9,5 @@ public class AppSession
 
     public void SignIn(User user) => CurrentUser = user;
     public void SignOut() => CurrentUser = null;
+
 }

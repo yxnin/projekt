@@ -1,15 +1,14 @@
 ﻿namespace DentalClinic.WinForms
 {
-    partial class AppointmentsForm
+    partial class UserAppointmentsForm
     {
         private System.ComponentModel.IContainer components = null;
 
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.TextBox tbFilter;
+        private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCancelAppointment;
-        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DataGridView gridAppointments;
 
         protected override void Dispose(bool disposing)
@@ -22,11 +21,10 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnCancelAppointment = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.tbFilter = new System.Windows.Forms.TextBox();
             this.gridAppointments = new System.Windows.Forms.DataGridView();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAppointments)).BeginInit();
@@ -34,11 +32,10 @@
             // 
             // panelTop
             // 
-            this.panelTop.Controls.Add(this.btnExport);
-            this.panelTop.Controls.Add(this.btnCancelAppointment);
+            this.panelTop.Controls.Add(this.lblInfo);
+            this.panelTop.Controls.Add(this.btnCancel);
             this.panelTop.Controls.Add(this.btnAdd);
             this.panelTop.Controls.Add(this.btnRefresh);
-            this.panelTop.Controls.Add(this.tbFilter);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
@@ -46,53 +43,43 @@
             this.panelTop.Size = new System.Drawing.Size(1100, 50);
             this.panelTop.TabIndex = 0;
             // 
-            // btnExport
+            // lblInfo
             // 
-            this.btnExport.Location = new System.Drawing.Point(1010, 10);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(80, 30);
-            this.btnExport.TabIndex = 4;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnCancelAppointment
-            // 
-            this.btnCancelAppointment.Location = new System.Drawing.Point(880, 10);
-            this.btnCancelAppointment.Name = "btnCancelAppointment";
-            this.btnCancelAppointment.Size = new System.Drawing.Size(120, 30);
-            this.btnCancelAppointment.TabIndex = 3;
-            this.btnCancelAppointment.Text = "Cancel";
-            this.btnCancelAppointment.UseVisualStyleBackColor = true;
-            this.btnCancelAppointment.Click += new System.EventHandler(this.btnCancelAppointment_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(770, 10);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 30);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.lblInfo.Location = new System.Drawing.Point(8, 14);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(560, 23);
+            this.lblInfo.TabIndex = 3;
+            this.lblInfo.Text = "My appointments";
             // 
             // btnRefresh
             // 
             this.btnRefresh.Location = new System.Drawing.Point(660, 10);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 30);
-            this.btnRefresh.TabIndex = 1;
+            this.btnRefresh.TabIndex = 0;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // tbFilter
+            // btnAdd
             // 
-            this.tbFilter.Location = new System.Drawing.Point(8, 12);
-            this.tbFilter.Name = "tbFilter";
-            this.tbFilter.PlaceholderText = "Filter (e.g. status=Scheduled AND dentistId=1 AND date>=2026-01-01)";
-            this.tbFilter.Size = new System.Drawing.Size(640, 27);
-            this.tbFilter.TabIndex = 0;
+            this.btnAdd.Location = new System.Drawing.Point(770, 10);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(150, 30);
+            this.btnAdd.TabIndex = 1;
+            this.btnAdd.Text = "Schedule";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(930, 10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(160, 30);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancel selected";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // gridAppointments
             // 
@@ -110,18 +97,17 @@
             this.gridAppointments.Size = new System.Drawing.Size(1100, 550);
             this.gridAppointments.TabIndex = 1;
             // 
-            // AppointmentsForm
+            // UserAppointmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1100, 600);
             this.Controls.Add(this.gridAppointments);
             this.Controls.Add(this.panelTop);
-            this.Name = "AppointmentsForm";
-            this.Text = "Wizyty";
-            this.Shown += new System.EventHandler(this.AppointmentsForm_Shown);
+            this.Name = "UserAppointmentsForm";
+            this.Text = "My appointments";
+            this.Shown += new System.EventHandler(this.UserAppointmentsForm_Shown);
             this.panelTop.ResumeLayout(false);
-            this.panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAppointments)).EndInit();
             this.ResumeLayout(false);
         }

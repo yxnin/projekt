@@ -19,8 +19,10 @@ public class DentalClinicDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<User>()
-            .HasIndex(u => u.Email)
-            .IsUnique();
+        .HasOne(u => u.Patient)
+        .WithMany()
+        .HasForeignKey(u => u.PatientId)
+        .OnDelete(DeleteBehavior.SetNull);
 
         // DateOnly? converter for SQLite (bez niespodzianek)
         var dateOnlyNullableConverter = new ValueConverter<DateOnly?, string?>(

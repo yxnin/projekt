@@ -33,6 +33,9 @@ public partial class AppointmentsForm : Form
 
     private async void AppointmentsForm_Shown(object sender, EventArgs e)
     {
+        // Placeholder po polsku (skład filtra zostaje angielski)
+        tbFilter.PlaceholderText = "Filtr (np. status=Scheduled AND dentistId=1 AND date>=2026-01-01)";
+
         await ReloadAsync();
     }
 
@@ -56,13 +59,13 @@ public partial class AppointmentsForm : Form
 
             var notifier = new MessageBoxNotificationCreator(this);
             notifier.Notify(
-                "Appointment scheduled",
-                $"PatientId={req.PatientId}, DentistId={req.DentistId}, ServiceId={req.ServiceCatalogItemId}, StartUtc={req.StartUtc:O}"
+                "Wizyta umówiona",
+                $"PacjentId={req.PatientId}, DentystaId={req.DentistId}, UsługaId={req.ServiceCatalogItemId}, Termin(UTC)={req.StartUtc:O}"
             );
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -73,7 +76,7 @@ public partial class AppointmentsForm : Form
         var selected = GetSelected();
         if (selected is null) return;
 
-        if (MessageBox.Show($"Cancel appointment #{selected.AppointmentId}?", "Confirm",
+        if (MessageBox.Show($"Anulować wizytę (ID={selected.AppointmentId})?", "Potwierdź",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             return;
 
@@ -83,11 +86,11 @@ public partial class AppointmentsForm : Form
             await ReloadAsync();
 
             var notifier = new MessageBoxNotificationCreator(this);
-            notifier.Notify("Appointment cancelled", $"AppointmentId={selected.AppointmentId}");
+            notifier.Notify("Wizyta anulowana", $"ID wizyty: {selected.AppointmentId}");
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -95,10 +98,9 @@ public partial class AppointmentsForm : Form
     {
         if (_reportFactories is null) return;
 
-        // wybór formatu: Yes = JSON, No = TXT
         var choice = MessageBox.Show(
-            "Export format:\nYes = JSON\nNo = TXT",
-            "Export",
+            "Format eksportu:\nTak = JSON\nNie = TXT",
+            "Eksport",
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 
@@ -109,7 +111,8 @@ public partial class AppointmentsForm : Form
 
         if (factory is null)
         {
-            MessageBox.Show("Report factory not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Nie znaleziono fabryki raportu.", "Błąd",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -124,20 +127,22 @@ public partial class AppointmentsForm : Form
 
             using var sfd = new SaveFileDialog
             {
-                Filter = factory.Description,
+                Filter = factory.Description, // musi być w formacie: "Opis|*.ext"
                 DefaultExt = factory.DefaultExtension.TrimStart('.'),
-                FileName = $"appointments_{DateTime.Now:yyyyMMdd_HHmm}{factory.DefaultExtension}"
+                FileName = $"wizyty_{DateTime.Now:yyyyMMdd_HHmm}{factory.DefaultExtension}"
             };
 
             if (sfd.ShowDialog(this) != DialogResult.OK) return;
 
             exporter.Export(data, sfd.FileName);
 
-            MessageBox.Show("Export completed.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Eksport zakończony.", "Eksport",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Export error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd eksportu",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -146,7 +151,8 @@ public partial class AppointmentsForm : Form
         if (gridAppointments.CurrentRow?.DataBoundItem is AppointmentListItem a)
             return a;
 
-        MessageBox.Show("Select an appointment first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Najpierw wybierz wizytę z listy.", "Informacja",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         return null;
     }
 
@@ -157,5 +163,46 @@ public partial class AppointmentsForm : Form
         var filter = tbFilter.Text?.Trim();
         var data = await _read.ListWithDetailsAsync(filter);
         gridAppointments.DataSource = data;
+
+        ApplyPolishColumnHeaders();
+    }
+
+    private void ApplyPolishColumnHeaders()
+    {
+        if (gridAppointments.Columns.Count == 0) return;
+
+        if (gridAppointments.Columns.Contains("AppointmentId"))
+            gridAppointments.Columns["AppointmentId"].HeaderText = "ID wizyty";
+
+        if (gridAppointments.Columns.Contains("StartUtc"))
+            gridAppointments.Columns["StartUtc"].HeaderText = "Termin (UTC)";
+
+        if (gridAppointments.Columns.Contains("Status"))
+            gridAppointments.Columns["Status"].HeaderText = "Status";
+
+        if (gridAppointments.Columns.Contains("PatientFullName"))
+            gridAppointments.Columns["PatientFullName"].HeaderText = "Pacjent";
+
+        if (gridAppointments.Columns.Contains("DentistFullName"))
+            gridAppointments.Columns["DentistFullName"].HeaderText = "Dentysta";
+
+        if (gridAppointments.Columns.Contains("ServiceName"))
+            gridAppointments.Columns["ServiceName"].HeaderText = "Usługa";
+
+        if (gridAppointments.Columns.Contains("ServicePrice"))
+            gridAppointments.Columns["ServicePrice"].HeaderText = "Cena";
+
+        if (gridAppointments.Columns.Contains("DurationMinutes"))
+            gridAppointments.Columns["DurationMinutes"].HeaderText = "Czas (min)";
+
+        // Ukryj techniczne ID-ki (zostawiamy ID wizyty widoczne)
+        if (gridAppointments.Columns.Contains("PatientId"))
+            gridAppointments.Columns["PatientId"].Visible = false;
+
+        if (gridAppointments.Columns.Contains("DentistId"))
+            gridAppointments.Columns["DentistId"].Visible = false;
+
+        if (gridAppointments.Columns.Contains("ServiceCatalogItemId"))
+            gridAppointments.Columns["ServiceCatalogItemId"].Visible = false;
     }
 }

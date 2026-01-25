@@ -64,7 +64,7 @@
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(90, 26);
             lblEmail.TabIndex = 0;
-            lblEmail.Text = "Email";
+            lblEmail.Text = "E-mail";
             lblEmail.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbEmail
@@ -84,7 +84,7 @@
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(90, 26);
             lblPassword.TabIndex = 1;
-            lblPassword.Text = "Password";
+            lblPassword.Text = "Hasło";
             lblPassword.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPassword
@@ -112,35 +112,35 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(335, 2);
+            btnLogin.Location = new Point(318, 2);
             btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(66, 22);
+            btnLogin.Size = new Size(83, 22);
             btnLogin.TabIndex = 0;
-            btnLogin.Text = "Login";
+            btnLogin.Text = "Zaloguj się";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(263, 2);
+            btnRegister.Location = new Point(219, 2);
             btnRegister.Margin = new Padding(3, 2, 3, 2);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(66, 22);
+            btnRegister.Size = new Size(93, 22);
             btnRegister.TabIndex = 1;
-            btnRegister.Text = "Register";
+            btnRegister.Text = "Zarejestruj się";
             btnRegister.UseVisualStyleBackColor = true;
             btnRegister.Click += btnRegister_Click;
             // 
             // btnCancel
             // 
             btnCancel.DialogResult = DialogResult.Cancel;
-            btnCancel.Location = new Point(191, 2);
+            btnCancel.Location = new Point(147, 2);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(66, 22);
             btnCancel.TabIndex = 2;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Anuluj";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // LoginForm
@@ -159,7 +159,7 @@
             Name = "LoginForm";
             Padding = new Padding(10, 9, 10, 9);
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Login";
+            Text = "Zaloguj się";
             table.ResumeLayout(false);
             table.PerformLayout();
             panelButtons.ResumeLayout(false);

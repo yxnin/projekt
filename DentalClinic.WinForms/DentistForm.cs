@@ -27,16 +27,14 @@ public partial class DentistsForm : Form
 
     private void ApplyPermissions()
     {
-        var role = _session?.CurrentUser?.Role;
+        var isAdmin = _session?.CurrentUser?.Role == UserRoles.Admin;
 
         // Tylko Admin może modyfikować dentystów
-        var isAdmin = role == UserRoles.Admin;
-
         btnAdd.Enabled = isAdmin;
         btnEdit.Enabled = isAdmin;
         btnDelete.Enabled = isAdmin;
 
-        // Refresh może każdy
+        // Odśwież może każdy
         btnRefresh.Enabled = true;
     }
 
@@ -60,7 +58,7 @@ public partial class DentistsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -82,7 +80,7 @@ public partial class DentistsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -94,7 +92,7 @@ public partial class DentistsForm : Form
         var selected = GetSelected();
         if (selected is null) return;
 
-        if (MessageBox.Show($"Delete dentist #{selected.Id}?", "Confirm",
+        if (MessageBox.Show($"Usunąć dentystę (ID={selected.Id})?", "Potwierdź",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             return;
 
@@ -105,7 +103,7 @@ public partial class DentistsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -114,7 +112,8 @@ public partial class DentistsForm : Form
         if (gridDentists.CurrentRow?.DataBoundItem is Dentist d)
             return d;
 
-        MessageBox.Show("Select a dentist first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Najpierw wybierz dentystę z listy.", "Informacja",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         return null;
     }
 
@@ -125,7 +124,29 @@ public partial class DentistsForm : Form
         var data = await _dentistService.GetAllAsync();
         gridDentists.DataSource = data;
 
-        // User ma widzieć specjalizację, imię, nazwisko (reszta opcjonalnie)
+        ApplyPolishColumnHeaders();
+    }
+
+    private void ApplyPolishColumnHeaders()
+    {
+        if (gridDentists.Columns.Count == 0) return;
+
+        if (gridDentists.Columns.Contains("FirstName"))
+            gridDentists.Columns["FirstName"].HeaderText = "Imię";
+
+        if (gridDentists.Columns.Contains("LastName"))
+            gridDentists.Columns["LastName"].HeaderText = "Nazwisko";
+
+        if (gridDentists.Columns.Contains("Phone"))
+            gridDentists.Columns["Phone"].HeaderText = "Telefon";
+
+        if (gridDentists.Columns.Contains("Specialization"))
+            gridDentists.Columns["Specialization"].HeaderText = "Specjalizacja";
+
+        // Ukryj techniczne
+        if (gridDentists.Columns.Contains("Id"))
+            gridDentists.Columns["Id"].Visible = false;
+
         if (gridDentists.Columns.Contains("CreatedUtc"))
             gridDentists.Columns["CreatedUtc"].Visible = false;
     }

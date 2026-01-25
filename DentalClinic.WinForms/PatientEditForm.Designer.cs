@@ -77,7 +77,7 @@
             lblFirst.Name = "lblFirst";
             lblFirst.Size = new Size(99, 26);
             lblFirst.TabIndex = 0;
-            lblFirst.Text = "First name";
+            lblFirst.Text = "Imię";
             lblFirst.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbFirstName
@@ -97,7 +97,7 @@
             lblLast.Name = "lblLast";
             lblLast.Size = new Size(99, 26);
             lblLast.TabIndex = 2;
-            lblLast.Text = "Last name";
+            lblLast.Text = "Nazwisko";
             lblLast.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbLastName
@@ -117,7 +117,7 @@
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(99, 26);
             lblPhone.TabIndex = 4;
-            lblPhone.Text = "Phone";
+            lblPhone.Text = "Nr. telefonu";
             lblPhone.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPhone
@@ -137,7 +137,7 @@
             lblBirth.Name = "lblBirth";
             lblBirth.Size = new Size(99, 26);
             lblBirth.TabIndex = 6;
-            lblBirth.Text = "Birth date";
+            lblBirth.Text = "Data urodzenia";
             lblBirth.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // dtBirth
@@ -171,7 +171,7 @@
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(66, 22);
             btnOk.TabIndex = 0;
-            btnOk.Text = "OK";
+            btnOk.Text = "Potwierdź";
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
@@ -183,7 +183,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(66, 22);
             btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Anuluj";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // PatientEditForm
@@ -202,7 +202,7 @@
             Name = "PatientEditForm";
             Padding = new Padding(10, 9, 10, 9);
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Patient";
+            Text = "Edytowanie informacji o pacjencie";
             table.ResumeLayout(false);
             table.PerformLayout();
             panelButtons.ResumeLayout(false);

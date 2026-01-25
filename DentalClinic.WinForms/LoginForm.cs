@@ -35,7 +35,7 @@ public partial class LoginForm : Form
             var user = await _auth.LoginAsync(email, pass);
             if (user is null)
             {
-                MessageBox.Show("Bad credentials.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Błędne dane logowania", "Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -45,7 +45,7 @@ public partial class LoginForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

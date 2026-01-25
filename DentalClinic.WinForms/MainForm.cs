@@ -57,7 +57,7 @@ public partial class MainForm : Form
 
         if (user is null)
         {
-            lblStatus.Text = "Not logged in";
+            lblStatus.Text = "Niezalogowano";
             btnPatients.Enabled = false;
             btnAppointments.Enabled = false;
             btnDentists.Enabled = false;
@@ -67,7 +67,9 @@ public partial class MainForm : Form
             return;
         }
 
-        lblStatus.Text = $"Logged in as: {user.Email} (Role: {user.Role})";
+        var rola = user.Role == "Admin" ? "Administrator" : "Pacjent";
+        lblStatus.Text = $"Zalogowano jako: {user.Email} (Rola: {rola})";
+
 
         // faktyczne zasady dostępu są w UiCommandFactory; tu tylko UX
         btnPatients.Enabled = true;
@@ -76,5 +78,10 @@ public partial class MainForm : Form
         btnServices.Enabled = true;
         btnMyAppointments.Enabled = true;
         btnLogout.Enabled = true;
+    }
+
+    private void lblStatus_Click(object sender, EventArgs e)
+    {
+
     }
 }

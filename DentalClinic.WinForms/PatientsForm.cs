@@ -27,8 +27,14 @@ public partial class PatientsForm : Form
 
     private void ApplyPermissions()
     {
-        var isAdmin = _session?.CurrentUser?.Role == "Admin";
+        var isAdmin = _session?.CurrentUser?.Role == UserRoles.Admin;
+
+        // Pacjenci = dane wrażliwe, więc tylko admin ma edycję
+        btnAdd.Enabled = isAdmin;
+        btnEdit.Enabled = isAdmin;
         btnDelete.Enabled = isAdmin;
+
+        btnRefresh.Enabled = true;
     }
 
     private async void btnRefresh_Click(object sender, EventArgs e)
@@ -39,6 +45,7 @@ public partial class PatientsForm : Form
     private async void btnAdd_Click(object sender, EventArgs e)
     {
         if (_patientService is null) return;
+        if (_session?.CurrentUser?.Role != UserRoles.Admin) return;
 
         using var dlg = new PatientEditForm();
         if (dlg.ShowDialog(this) != DialogResult.OK) return;
@@ -50,13 +57,14 @@ public partial class PatientsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
     private async void btnEdit_Click(object sender, EventArgs e)
     {
         if (_patientService is null) return;
+        if (_session?.CurrentUser?.Role != UserRoles.Admin) return;
 
         var selected = GetSelected();
         if (selected is null) return;
@@ -71,7 +79,7 @@ public partial class PatientsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -79,10 +87,10 @@ public partial class PatientsForm : Form
     {
         if (_patientService is null) return;
 
-        var isAdmin = _session?.CurrentUser?.Role == "Admin";
+        var isAdmin = _session?.CurrentUser?.Role == UserRoles.Admin;
         if (!isAdmin)
         {
-            MessageBox.Show("Only Admin can delete.", "Access denied",
+            MessageBox.Show("Tylko administrator może usuwać.", "Brak dostępu",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -90,7 +98,7 @@ public partial class PatientsForm : Form
         var selected = GetSelected();
         if (selected is null) return;
 
-        if (MessageBox.Show($"Delete patient #{selected.Id}?", "Confirm",
+        if (MessageBox.Show($"Usunąć pacjenta (ID={selected.Id})?", "Potwierdź",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             return;
 
@@ -101,7 +109,7 @@ public partial class PatientsForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -110,7 +118,8 @@ public partial class PatientsForm : Form
         if (gridPatients.CurrentRow?.DataBoundItem is Patient p)
             return p;
 
-        MessageBox.Show("Select a patient first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Najpierw wybierz pacjenta z listy.", "Informacja",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         return null;
     }
 
@@ -120,5 +129,31 @@ public partial class PatientsForm : Form
 
         var data = await _patientService.GetAllAsync();
         gridPatients.DataSource = data;
+
+        ApplyPolishColumnHeaders();
+    }
+
+    private void ApplyPolishColumnHeaders()
+    {
+        if (gridPatients.Columns.Count == 0) return;
+
+        if (gridPatients.Columns.Contains("FirstName"))
+            gridPatients.Columns["FirstName"].HeaderText = "Imię";
+
+        if (gridPatients.Columns.Contains("LastName"))
+            gridPatients.Columns["LastName"].HeaderText = "Nazwisko";
+
+        if (gridPatients.Columns.Contains("Phone"))
+            gridPatients.Columns["Phone"].HeaderText = "Telefon";
+
+        if (gridPatients.Columns.Contains("BirthDate"))
+            gridPatients.Columns["BirthDate"].HeaderText = "Data urodzenia";
+
+        // Ukryj techniczne
+        if (gridPatients.Columns.Contains("Id"))
+            gridPatients.Columns["Id"].Visible = false;
+
+        if (gridPatients.Columns.Contains("CreatedUtc"))
+            gridPatients.Columns["CreatedUtc"].Visible = false;
     }
 }

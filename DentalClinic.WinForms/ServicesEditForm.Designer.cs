@@ -72,7 +72,7 @@
             lblName.Name = "lblName";
             lblName.Size = new Size(99, 26);
             lblName.TabIndex = 0;
-            lblName.Text = "Name";
+            lblName.Text = "Nazwa usługi";
             lblName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbName
@@ -92,7 +92,7 @@
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(99, 26);
             lblPrice.TabIndex = 1;
-            lblPrice.Text = "Price";
+            lblPrice.Text = "Cena";
             lblPrice.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // nudPrice
@@ -114,7 +114,7 @@
             lblDuration.Name = "lblDuration";
             lblDuration.Size = new Size(99, 26);
             lblDuration.TabIndex = 2;
-            lblDuration.Text = "Duration (min)";
+            lblDuration.Text = "Czas trwania";
             lblDuration.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // nudDuration
@@ -148,7 +148,7 @@
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(66, 22);
             btnOk.TabIndex = 0;
-            btnOk.Text = "OK";
+            btnOk.Text = "Potwierdź";
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
@@ -160,7 +160,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(66, 22);
             btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Anuluj";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // ServiceEditForm
@@ -179,7 +179,7 @@
             Name = "ServiceEditForm";
             Padding = new Padding(10, 9, 10, 9);
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Service";
+            Text = "Usługi";
             table.ResumeLayout(false);
             table.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudPrice).EndInit();

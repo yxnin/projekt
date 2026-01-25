@@ -22,110 +22,119 @@
 
         private void InitializeComponent()
         {
-            this.btnPatients = new System.Windows.Forms.Button();
-            this.btnAppointments = new System.Windows.Forms.Button();
-            this.btnDentists = new System.Windows.Forms.Button();
-            this.btnServices = new System.Windows.Forms.Button();
-            this.btnMyAppointments = new System.Windows.Forms.Button();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            btnPatients = new Button();
+            btnAppointments = new Button();
+            btnDentists = new Button();
+            btnServices = new Button();
+            btnMyAppointments = new Button();
+            btnLogin = new Button();
+            btnLogout = new Button();
+            lblStatus = new Label();
+            SuspendLayout();
             // 
             // btnPatients
             // 
-            this.btnPatients.Location = new System.Drawing.Point(24, 24);
-            this.btnPatients.Name = "btnPatients";
-            this.btnPatients.Size = new System.Drawing.Size(200, 45);
-            this.btnPatients.TabIndex = 0;
-            this.btnPatients.Text = "Pacjenci";
-            this.btnPatients.UseVisualStyleBackColor = true;
-            this.btnPatients.Click += new System.EventHandler(this.btnPatients_Click);
+            btnPatients.Location = new Point(21, 18);
+            btnPatients.Margin = new Padding(3, 2, 3, 2);
+            btnPatients.Name = "btnPatients";
+            btnPatients.Size = new Size(175, 34);
+            btnPatients.TabIndex = 0;
+            btnPatients.Text = "Pacjenci";
+            btnPatients.UseVisualStyleBackColor = true;
+            btnPatients.Click += btnPatients_Click;
             // 
             // btnAppointments
             // 
-            this.btnAppointments.Location = new System.Drawing.Point(24, 80);
-            this.btnAppointments.Name = "btnAppointments";
-            this.btnAppointments.Size = new System.Drawing.Size(200, 45);
-            this.btnAppointments.TabIndex = 1;
-            this.btnAppointments.Text = "Wizyty (admin)";
-            this.btnAppointments.UseVisualStyleBackColor = true;
-            this.btnAppointments.Click += new System.EventHandler(this.btnAppointments_Click);
+            btnAppointments.Location = new Point(21, 60);
+            btnAppointments.Margin = new Padding(3, 2, 3, 2);
+            btnAppointments.Name = "btnAppointments";
+            btnAppointments.Size = new Size(175, 34);
+            btnAppointments.TabIndex = 1;
+            btnAppointments.Text = "Wizyty (admin)";
+            btnAppointments.UseVisualStyleBackColor = true;
+            btnAppointments.Click += btnAppointments_Click;
             // 
             // btnDentists
             // 
-            this.btnDentists.Location = new System.Drawing.Point(24, 136);
-            this.btnDentists.Name = "btnDentists";
-            this.btnDentists.Size = new System.Drawing.Size(200, 45);
-            this.btnDentists.TabIndex = 2;
-            this.btnDentists.Text = "Dentyści";
-            this.btnDentists.UseVisualStyleBackColor = true;
-            this.btnDentists.Click += new System.EventHandler(this.btnDentists_Click);
+            btnDentists.Location = new Point(21, 102);
+            btnDentists.Margin = new Padding(3, 2, 3, 2);
+            btnDentists.Name = "btnDentists";
+            btnDentists.Size = new Size(175, 34);
+            btnDentists.TabIndex = 2;
+            btnDentists.Text = "Dentyści";
+            btnDentists.UseVisualStyleBackColor = true;
+            btnDentists.Click += btnDentists_Click;
             // 
             // btnServices
             // 
-            this.btnServices.Location = new System.Drawing.Point(24, 192);
-            this.btnServices.Name = "btnServices";
-            this.btnServices.Size = new System.Drawing.Size(200, 45);
-            this.btnServices.TabIndex = 3;
-            this.btnServices.Text = "Usługi";
-            this.btnServices.UseVisualStyleBackColor = true;
-            this.btnServices.Click += new System.EventHandler(this.btnServices_Click);
+            btnServices.Location = new Point(21, 144);
+            btnServices.Margin = new Padding(3, 2, 3, 2);
+            btnServices.Name = "btnServices";
+            btnServices.Size = new Size(175, 34);
+            btnServices.TabIndex = 3;
+            btnServices.Text = "Usługi";
+            btnServices.UseVisualStyleBackColor = true;
+            btnServices.Click += btnServices_Click;
             // 
             // btnMyAppointments
             // 
-            this.btnMyAppointments.Location = new System.Drawing.Point(24, 248);
-            this.btnMyAppointments.Name = "btnMyAppointments";
-            this.btnMyAppointments.Size = new System.Drawing.Size(200, 45);
-            this.btnMyAppointments.TabIndex = 4;
-            this.btnMyAppointments.Text = "Moje wizyty (user)";
-            this.btnMyAppointments.UseVisualStyleBackColor = true;
-            this.btnMyAppointments.Click += new System.EventHandler(this.btnMyAppointments_Click);
+            btnMyAppointments.Location = new Point(21, 186);
+            btnMyAppointments.Margin = new Padding(3, 2, 3, 2);
+            btnMyAppointments.Name = "btnMyAppointments";
+            btnMyAppointments.Size = new Size(175, 34);
+            btnMyAppointments.TabIndex = 4;
+            btnMyAppointments.Text = "Moje wizyty";
+            btnMyAppointments.UseVisualStyleBackColor = true;
+            btnMyAppointments.Click += btnMyAppointments_Click;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(24, 304);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(200, 45);
-            this.btnLogin.TabIndex = 5;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            btnLogin.Location = new Point(21, 228);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(175, 34);
+            btnLogin.TabIndex = 5;
+            btnLogin.Text = "Zaloguj się";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(24, 360);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(200, 45);
-            this.btnLogout.TabIndex = 6;
-            this.btnLogout.Text = "Wyloguj";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            btnLogout.Location = new Point(21, 270);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(175, 34);
+            btnLogout.TabIndex = 6;
+            btnLogout.Text = "Wyloguj";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(24, 425);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(820, 23);
-            this.lblStatus.TabIndex = 7;
-            this.lblStatus.Text = "Not logged in";
+            lblStatus.Location = new Point(21, 319);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(718, 17);
+            lblStatus.TabIndex = 7;
+            lblStatus.Text = "Niezalogowano";
+            lblStatus.Click += lblStatus_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 500);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.btnMyAppointments);
-            this.Controls.Add(this.btnServices);
-            this.Controls.Add(this.btnDentists);
-            this.Controls.Add(this.btnAppointments);
-            this.Controls.Add(this.btnPatients);
-            this.Name = "MainForm";
-            this.Text = "DentalClinic";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(788, 375);
+            Controls.Add(lblStatus);
+            Controls.Add(btnLogout);
+            Controls.Add(btnLogin);
+            Controls.Add(btnMyAppointments);
+            Controls.Add(btnServices);
+            Controls.Add(btnDentists);
+            Controls.Add(btnAppointments);
+            Controls.Add(btnPatients);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "MainForm";
+            Text = "DentalClinic";
+            ResumeLayout(false);
         }
     }
 }

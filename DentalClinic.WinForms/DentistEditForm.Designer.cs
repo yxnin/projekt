@@ -77,8 +77,9 @@
             lblFirst.Name = "lblFirst";
             lblFirst.Size = new Size(99, 26);
             lblFirst.TabIndex = 0;
-            lblFirst.Text = "First name";
+            lblFirst.Text = "Imię";
             lblFirst.TextAlign = ContentAlignment.MiddleLeft;
+            lblFirst.Click += lblFirst_Click;
             // 
             // tbFirstName
             // 
@@ -97,7 +98,7 @@
             lblLast.Name = "lblLast";
             lblLast.Size = new Size(99, 26);
             lblLast.TabIndex = 2;
-            lblLast.Text = "Last name";
+            lblLast.Text = "Nazwisko";
             lblLast.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbLastName
@@ -117,7 +118,7 @@
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(99, 26);
             lblPhone.TabIndex = 4;
-            lblPhone.Text = "Phone";
+            lblPhone.Text = "Nr. telefonu";
             lblPhone.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPhone
@@ -137,7 +138,7 @@
             lblSpec.Name = "lblSpec";
             lblSpec.Size = new Size(99, 26);
             lblSpec.TabIndex = 6;
-            lblSpec.Text = "Specialization";
+            lblSpec.Text = "Specjalizacja";
             lblSpec.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbSpecialization
@@ -180,7 +181,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(66, 22);
             btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Anuluj";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // DentistEditForm
@@ -199,7 +200,7 @@
             Name = "DentistEditForm";
             Padding = new Padding(10, 9, 10, 9);
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Dentist";
+            Text = "Dodawanie pracownika";
             table.ResumeLayout(false);
             table.PerformLayout();
             panelButtons.ResumeLayout(false);

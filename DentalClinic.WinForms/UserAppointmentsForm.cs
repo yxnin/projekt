@@ -35,20 +35,21 @@ public partial class UserAppointmentsForm : Form
         var user = _session?.CurrentUser;
         if (user is null)
         {
-            MessageBox.Show("Please login first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Najpierw musisz się zalogować.", "Informacja",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
             return;
         }
 
         if (user.PatientId is null)
         {
-            MessageBox.Show("This account is not linked to a patient record. Contact admin.", "Info",
+            MessageBox.Show("To konto nie jest powiązane z kartą pacjenta. Skontaktuj się z administratorem.", "Informacja",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnAdd.Enabled = false;
             btnCancel.Enabled = false;
         }
 
-        lblInfo.Text = $"Logged in as: {user.Email}";
+        lblInfo.Text = $"Zalogowano jako: {user.Email}";
         await ReloadAsync();
     }
 
@@ -71,11 +72,12 @@ public partial class UserAppointmentsForm : Form
             await ReloadAsync();
 
             new MessageBoxNotificationCreator(this)
-                .Notify("Appointment scheduled", $"StartUtc={req.StartUtc:O}, DentistId={req.DentistId}, ServiceId={req.ServiceCatalogItemId}");
+                .Notify("Wizyta umówiona",
+                    $"Termin (UTC): {req.StartUtc:O}, DentystaId={req.DentistId}, UsługaId={req.ServiceCatalogItemId}");
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -87,7 +89,7 @@ public partial class UserAppointmentsForm : Form
         var selected = GetSelected();
         if (selected is null) return;
 
-        if (MessageBox.Show($"Cancel appointment #{selected.AppointmentId}?", "Confirm",
+        if (MessageBox.Show($"Anulować wizytę (ID={selected.AppointmentId})?", "Potwierdź",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             return;
 
@@ -97,11 +99,11 @@ public partial class UserAppointmentsForm : Form
             await ReloadAsync();
 
             new MessageBoxNotificationCreator(this)
-                .Notify("Appointment cancelled", $"AppointmentId={selected.AppointmentId}");
+                .Notify("Wizyta anulowana", $"ID wizyty: {selected.AppointmentId}");
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -110,7 +112,8 @@ public partial class UserAppointmentsForm : Form
         if (gridAppointments.CurrentRow?.DataBoundItem is AppointmentListItem a)
             return a;
 
-        MessageBox.Show("Select an appointment first.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Najpierw wybierz wizytę z listy.", "Informacja",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         return null;
     }
 
@@ -124,9 +127,50 @@ public partial class UserAppointmentsForm : Form
         var data = await _read.ListWithDetailsAsync($"patientId={patientId.Value}");
         gridAppointments.DataSource = data;
 
-        if (gridAppointments.Columns.Contains("PatientFullName"))
-            gridAppointments.Columns["PatientFullName"].Visible = false;
+        ApplyPolishColumnHeaders();
+    }
+
+    private void ApplyPolishColumnHeaders()
+    {
+        if (gridAppointments.Columns.Count == 0) return;
+
+        // Nagłówki po polsku (DTO AppointmentListItem)
+        if (gridAppointments.Columns.Contains("StartUtc"))
+            gridAppointments.Columns["StartUtc"].HeaderText = "Termin (UTC)";
+
+        if (gridAppointments.Columns.Contains("Status"))
+            gridAppointments.Columns["Status"].HeaderText = "Status";
+
+        if (gridAppointments.Columns.Contains("DentistFullName"))
+            gridAppointments.Columns["DentistFullName"].HeaderText = "Dentysta";
+
+        if (gridAppointments.Columns.Contains("ServiceName"))
+            gridAppointments.Columns["ServiceName"].HeaderText = "Usługa";
+
+        if (gridAppointments.Columns.Contains("ServicePrice"))
+            gridAppointments.Columns["ServicePrice"].HeaderText = "Cena";
+
+        if (gridAppointments.Columns.Contains("DurationMinutes"))
+            gridAppointments.Columns["DurationMinutes"].HeaderText = "Czas (min)";
+
+        // Ukryj dane techniczne / zbędne dla pacjenta
+        if (gridAppointments.Columns.Contains("AppointmentId"))
+        {
+            gridAppointments.Columns["AppointmentId"].HeaderText = "ID wizyty";
+            // jeśli chcesz ukryć ID całkiem:
+            // gridAppointments.Columns["AppointmentId"].Visible = false;
+        }
+
         if (gridAppointments.Columns.Contains("PatientId"))
             gridAppointments.Columns["PatientId"].Visible = false;
+
+        if (gridAppointments.Columns.Contains("PatientFullName"))
+            gridAppointments.Columns["PatientFullName"].Visible = false;
+
+        if (gridAppointments.Columns.Contains("DentistId"))
+            gridAppointments.Columns["DentistId"].Visible = false;
+
+        if (gridAppointments.Columns.Contains("ServiceCatalogItemId"))
+            gridAppointments.Columns["ServiceCatalogItemId"].Visible = false;
     }
 }

@@ -49,7 +49,7 @@
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(560, 23);
             this.lblInfo.TabIndex = 3;
-            this.lblInfo.Text = "My appointments";
+            this.lblInfo.Text = "Moje wizyty";
             // 
             // btnRefresh
             // 
@@ -57,7 +57,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 30);
             this.btnRefresh.TabIndex = 0;
-            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Text = "Odśwież";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -67,7 +67,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(150, 30);
             this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "Schedule";
+            this.btnAdd.Text = "Zaplanuj";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -77,7 +77,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(160, 30);
             this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel selected";
+            this.btnCancel.Text = "Odwołaj wybraną wizytę";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -105,7 +105,7 @@
             this.Controls.Add(this.gridAppointments);
             this.Controls.Add(this.panelTop);
             this.Name = "UserAppointmentsForm";
-            this.Text = "My appointments";
+            this.Text = "Moje wizyty";
             this.Shown += new System.EventHandler(this.UserAppointmentsForm_Shown);
             this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAppointments)).EndInit();

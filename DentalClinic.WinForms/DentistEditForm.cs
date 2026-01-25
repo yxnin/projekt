@@ -43,7 +43,7 @@ public partial class DentistEditForm : Form
 
         if (string.IsNullOrWhiteSpace(Result.FirstName) || string.IsNullOrWhiteSpace(Result.LastName))
         {
-            MessageBox.Show("First name and last name are required.", "Validation",
+            MessageBox.Show("Imię i nazwisko jest wymagane.", "Validation",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             DialogResult = DialogResult.None;
             return;
@@ -51,7 +51,7 @@ public partial class DentistEditForm : Form
 
         if (string.IsNullOrWhiteSpace(Result.Specialization))
         {
-            MessageBox.Show("Specialization is required.", "Validation",
+            MessageBox.Show("Wymagane jest podanie specjalizacji.", "Validation",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             DialogResult = DialogResult.None;
             return;
@@ -59,5 +59,10 @@ public partial class DentistEditForm : Form
 
         DialogResult = DialogResult.OK;
         Close();
+    }
+
+    private void lblFirst_Click(object sender, EventArgs e)
+    {
+
     }
 }

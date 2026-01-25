@@ -75,7 +75,7 @@
             lblPatient.Name = "lblPatient";
             lblPatient.Size = new Size(99, 26);
             lblPatient.TabIndex = 0;
-            lblPatient.Text = "Patient";
+            lblPatient.Text = "Pacjent";
             lblPatient.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbPatient
@@ -96,7 +96,7 @@
             lblDentist.Name = "lblDentist";
             lblDentist.Size = new Size(99, 26);
             lblDentist.TabIndex = 2;
-            lblDentist.Text = "Dentist";
+            lblDentist.Text = "Pracownik";
             lblDentist.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbDentist
@@ -117,7 +117,7 @@
             lblService.Name = "lblService";
             lblService.Size = new Size(99, 26);
             lblService.TabIndex = 4;
-            lblService.Text = "Service";
+            lblService.Text = "Usługa";
             lblService.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbService
@@ -138,7 +138,7 @@
             lblStart.Name = "lblStart";
             lblStart.Size = new Size(99, 26);
             lblStart.TabIndex = 6;
-            lblStart.Text = "Start";
+            lblStart.Text = "Data";
             lblStart.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // dtStart
@@ -171,7 +171,7 @@
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(66, 22);
             btnOk.TabIndex = 0;
-            btnOk.Text = "OK";
+            btnOk.Text = "Potwierdź";
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
@@ -183,7 +183,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(66, 22);
             btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Anuluj";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // AppointmentCreateForm
@@ -202,7 +202,7 @@
             Name = "AppointmentCreateForm";
             Padding = new Padding(10, 9, 10, 9);
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Add appointment";
+            Text = "Dodaj wizytę";
             table.ResumeLayout(false);
             table.PerformLayout();
             panelButtons.ResumeLayout(false);

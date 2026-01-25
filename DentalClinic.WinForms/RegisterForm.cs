@@ -77,7 +77,7 @@ public partial class RegisterForm : Form
             await _auth.LinkPatientAsync(user.Id, createdPatient.Id);
             user.PatientId = createdPatient.Id;
 
-            // 4) sign in
+            // 4) logowanie
             _session.SignIn(user);
 
             DialogResult = DialogResult.OK;
@@ -85,7 +85,7 @@ public partial class RegisterForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Register error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "Błąd rejestracji", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

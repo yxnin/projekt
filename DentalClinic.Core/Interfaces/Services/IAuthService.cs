@@ -7,6 +7,6 @@ public interface IAuthService
     Task<User> RegisterAsync(string email, string password, string role = UserRoles.User, CancellationToken ct = default);
     Task<User?> LoginAsync(string email, string password, CancellationToken ct = default);
 
-    // NOWE: powiązanie konta z pacjentem
+    // wiazanie konta z pacjentem
     Task LinkPatientAsync(int userId, int patientId, CancellationToken ct = default);
 }

@@ -29,12 +29,12 @@ public partial class DentistsForm : Form
     {
         var isAdmin = _session?.CurrentUser?.Role == UserRoles.Admin;
 
-        // Tylko Admin może modyfikować dentystów
+        // tylko administrator 
         btnAdd.Enabled = isAdmin;
         btnEdit.Enabled = isAdmin;
         btnDelete.Enabled = isAdmin;
 
-        // Odśwież może każdy
+        // kazdy moze odswiezyc
         btnRefresh.Enabled = true;
     }
 
@@ -143,7 +143,7 @@ public partial class DentistsForm : Form
         if (gridDentists.Columns.Contains("Specialization"))
             gridDentists.Columns["Specialization"].HeaderText = "Specjalizacja";
 
-        // Ukryj techniczne
+        // ukrycie
         if (gridDentists.Columns.Contains("Id"))
             gridDentists.Columns["Id"].Visible = false;
 

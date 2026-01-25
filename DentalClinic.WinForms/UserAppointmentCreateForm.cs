@@ -10,7 +10,7 @@ public partial class UserAppointmentCreateForm : Form
     private readonly IDentistService? _dentists;
     private readonly IServiceCatalogService? _services;
 
-    // ważne: Designer nie próbuje tego serializować
+    // blokada serializacji w designerze
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public int PatientId { get; set; }
 

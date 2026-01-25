@@ -69,7 +69,7 @@
             table.Size = new Size(404, 102);
             table.TabIndex = 0;
             // 
-            // lblFirst
+            // lblImie
             // 
             lblFirst.AutoSize = true;
             lblFirst.Dock = DockStyle.Fill;
@@ -81,7 +81,7 @@
             lblFirst.TextAlign = ContentAlignment.MiddleLeft;
             lblFirst.Click += lblFirst_Click;
             // 
-            // tbFirstName
+            // tbImie
             // 
             tbFirstName.Dock = DockStyle.Fill;
             tbFirstName.Location = new Point(108, 2);
@@ -90,7 +90,7 @@
             tbFirstName.Size = new Size(293, 23);
             tbFirstName.TabIndex = 1;
             // 
-            // lblLast
+            // lblNazwisko
             // 
             lblLast.AutoSize = true;
             lblLast.Dock = DockStyle.Fill;
@@ -101,7 +101,7 @@
             lblLast.Text = "Nazwisko";
             lblLast.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // tbLastName
+            // tbNazwisko
             // 
             tbLastName.Dock = DockStyle.Fill;
             tbLastName.Location = new Point(108, 28);
@@ -110,7 +110,7 @@
             tbLastName.Size = new Size(293, 23);
             tbLastName.TabIndex = 3;
             // 
-            // lblPhone
+            // lblTelefon
             // 
             lblPhone.AutoSize = true;
             lblPhone.Dock = DockStyle.Fill;
@@ -121,7 +121,7 @@
             lblPhone.Text = "Nr. telefonu";
             lblPhone.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // tbPhone
+            // tbTelefon
             // 
             tbPhone.Dock = DockStyle.Fill;
             tbPhone.Location = new Point(108, 54);
@@ -130,7 +130,7 @@
             tbPhone.Size = new Size(293, 23);
             tbPhone.TabIndex = 5;
             // 
-            // lblSpec
+            // lblSpecjalizacja
             // 
             lblSpec.AutoSize = true;
             lblSpec.Dock = DockStyle.Fill;
@@ -141,7 +141,7 @@
             lblSpec.Text = "Specjalizacja";
             lblSpec.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // tbSpecialization
+            // tbSpecjalizacja
             // 
             tbSpecialization.Dock = DockStyle.Fill;
             tbSpecialization.Location = new Point(108, 80);
@@ -150,7 +150,7 @@
             tbSpecialization.Size = new Size(293, 23);
             tbSpecialization.TabIndex = 7;
             // 
-            // panelButtons
+            // panelButton
             // 
             panelButtons.Controls.Add(btnOk);
             panelButtons.Controls.Add(btnCancel);
@@ -162,14 +162,14 @@
             panelButtons.Size = new Size(404, 30);
             panelButtons.TabIndex = 1;
             // 
-            // btnOk
+            // btnPotwierdz
             // 
             btnOk.Location = new Point(335, 2);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(66, 22);
             btnOk.TabIndex = 0;
-            btnOk.Text = "OK";
+            btnOk.Text = "Potwierdź";
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 

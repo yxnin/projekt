@@ -71,7 +71,7 @@ public partial class MainForm : Form
         lblStatus.Text = $"Zalogowano jako: {user.Email} (Rola: {rola})";
 
 
-        // faktyczne zasady dostępu są w UiCommandFactory; tu tylko UX
+        //  UX zasad dostepu
         btnPatients.Enabled = true;
         btnAppointments.Enabled = true;
         btnDentists.Enabled = true;

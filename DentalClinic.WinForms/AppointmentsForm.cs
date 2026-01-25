@@ -33,7 +33,7 @@ public partial class AppointmentsForm : Form
 
     private async void AppointmentsForm_Shown(object sender, EventArgs e)
     {
-        // Placeholder po polsku (skład filtra zostaje angielski)
+        // placeholder 
         tbFilter.PlaceholderText = "Filtr (np. status=Scheduled AND dentistId=1 AND date>=2026-01-01)";
 
         await ReloadAsync();
@@ -127,7 +127,7 @@ public partial class AppointmentsForm : Form
 
             using var sfd = new SaveFileDialog
             {
-                Filter = factory.Description, // musi być w formacie: "Opis|*.ext"
+                Filter = factory.Description, 
                 DefaultExt = factory.DefaultExtension.TrimStart('.'),
                 FileName = $"wizyty_{DateTime.Now:yyyyMMdd_HHmm}{factory.DefaultExtension}"
             };
@@ -195,7 +195,7 @@ public partial class AppointmentsForm : Form
         if (gridAppointments.Columns.Contains("DurationMinutes"))
             gridAppointments.Columns["DurationMinutes"].HeaderText = "Czas (min)";
 
-        // Ukryj techniczne ID-ki (zostawiamy ID wizyty widoczne)
+        // ukrycie
         if (gridAppointments.Columns.Contains("PatientId"))
             gridAppointments.Columns["PatientId"].Visible = false;
 

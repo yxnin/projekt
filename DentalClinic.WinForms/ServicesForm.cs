@@ -11,7 +11,7 @@ public partial class ServicesForm : Form
     public ServicesForm()
     {
         InitializeComponent();
-        // jeśli designer ma AutoGenerateColumns=true, zostawiamy jak jest
+        
     }
 
     public ServicesForm(IServiceCatalogService serviceCatalog, AppSession session) : this()
@@ -131,7 +131,7 @@ public partial class ServicesForm : Form
     {
         if (gridServices.Columns.Count == 0) return;
 
-        // Nagłówki po polsku
+        // polskie naglowki
         if (gridServices.Columns.Contains("Name"))
             gridServices.Columns["Name"].HeaderText = "Nazwa";
 
@@ -141,7 +141,7 @@ public partial class ServicesForm : Form
         if (gridServices.Columns.Contains("DurationMinutes"))
             gridServices.Columns["DurationMinutes"].HeaderText = "Czas (min)";
 
-        // Techniczne – ukryj
+        // ukrycie
         if (gridServices.Columns.Contains("Id"))
             gridServices.Columns["Id"].Visible = false;
 

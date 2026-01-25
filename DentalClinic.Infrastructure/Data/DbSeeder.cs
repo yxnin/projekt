@@ -8,7 +8,7 @@ public static class DbSeeder
 {
     public static async Task SeedAsync(DentalClinicDbContext db, CancellationToken ct = default)
     {
-        // Users
+        // uzytkownicy
         if (!await db.Users.AnyAsync(ct))
         {
             db.Users.Add(new User
@@ -19,7 +19,7 @@ public static class DbSeeder
             });
         }
 
-        // Dentists
+        // dentysci
         if (!await db.Dentists.AnyAsync(ct))
         {
             db.Dentists.AddRange(
@@ -28,7 +28,7 @@ public static class DbSeeder
             );
         }
 
-        // Services
+        // uslugi
         if (!await db.Services.AnyAsync(ct))
         {
             db.Services.AddRange(
@@ -38,10 +38,10 @@ public static class DbSeeder
             );
         }
 
-        // Przykładowy user z powiązanym pacjentem (RODO panel usera)
+        // przykladowy uzytkownik
         if (!await db.Users.AnyAsync(u => u.Email == "user@clinic.local", ct))
         {
-            // upewnij się, że pacjent istnieje
+            // regula ze jesli pacjent istnieje to go uzyj, jesli nie to utworz
             var patient = await db.Patients.FirstOrDefaultAsync(p => p.FirstName == "User" && p.LastName == "Demo", ct);
             if (patient is null)
             {
@@ -67,12 +67,11 @@ public static class DbSeeder
             await db.SaveChangesAsync(ct);
         }
 
-        // Patients
+        // pacjencji
         if (!await db.Patients.AnyAsync(ct))
         {
             db.Patients.AddRange(
-                new Patient { FirstName = "Michał", LastName = "Testowy", Phone = "600111222", BirthDate = new DateOnly(2000, 1, 1) },
-                new Patient { FirstName = "Karolina", LastName = "Przykład", Phone = "600333444", BirthDate = new DateOnly(1999, 5, 10) }
+                
             );
         }
 

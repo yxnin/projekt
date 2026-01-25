@@ -24,7 +24,7 @@ public class DentalClinicDbContext : DbContext
         .HasForeignKey(u => u.PatientId)
         .OnDelete(DeleteBehavior.SetNull);
 
-        // DateOnly? converter for SQLite (bez niespodzianek)
+        // konwerter do sqlite dla dateonly
         var dateOnlyNullableConverter = new ValueConverter<DateOnly?, string?>(
             v => v.HasValue ? v.Value.ToString("yyyy-MM-dd") : null,
             v => string.IsNullOrWhiteSpace(v) ? (DateOnly?)null : DateOnly.Parse(v));

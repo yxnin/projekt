@@ -4,10 +4,10 @@
 
 namespace DentalClinic.Infrastructure.Migrations
 {
-    /// <inheritdoc />
+    
     public partial class LinkUserToPatient : Migration
     {
-        /// <inheritdoc />
+        
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
@@ -34,7 +34,7 @@ namespace DentalClinic.Infrastructure.Migrations
                 onDelete: ReferentialAction.SetNull);
         }
 
-        /// <inheritdoc />
+        
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

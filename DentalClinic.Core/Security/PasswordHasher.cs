@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DentalClinic.Core.Security;
 
-// format: saltHex:hashHex
+// format hashowania salthex:hashhex
 public static class PasswordHasher
 {
     public static string Hash(string password)

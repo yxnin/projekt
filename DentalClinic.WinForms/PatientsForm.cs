@@ -29,7 +29,7 @@ public partial class PatientsForm : Form
     {
         var isAdmin = _session?.CurrentUser?.Role == UserRoles.Admin;
 
-        // Pacjenci = dane wrażliwe, więc tylko admin ma edycję
+        // tyko admin moze edytowac
         btnAdd.Enabled = isAdmin;
         btnEdit.Enabled = isAdmin;
         btnDelete.Enabled = isAdmin;
@@ -149,7 +149,7 @@ public partial class PatientsForm : Form
         if (gridPatients.Columns.Contains("BirthDate"))
             gridPatients.Columns["BirthDate"].HeaderText = "Data urodzenia";
 
-        // Ukryj techniczne
+        // ukrycie
         if (gridPatients.Columns.Contains("Id"))
             gridPatients.Columns["Id"].Visible = false;
 

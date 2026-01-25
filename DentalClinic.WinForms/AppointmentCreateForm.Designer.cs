@@ -42,7 +42,7 @@
             panelButtons.SuspendLayout();
             SuspendLayout();
             // 
-            // table
+            // tabela
             // 
             table.ColumnCount = 2;
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
@@ -67,7 +67,7 @@
             table.Size = new Size(491, 102);
             table.TabIndex = 0;
             // 
-            // lblPatient
+            // lblpacjent
             // 
             lblPatient.AutoSize = true;
             lblPatient.Dock = DockStyle.Fill;
@@ -78,7 +78,7 @@
             lblPatient.Text = "Pacjent";
             lblPatient.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // cbPatient
+            // cbpacjent
             // 
             cbPatient.Dock = DockStyle.Fill;
             cbPatient.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -88,7 +88,7 @@
             cbPatient.Size = new Size(380, 23);
             cbPatient.TabIndex = 1;
             // 
-            // lblDentist
+            // lbldentysta
             // 
             lblDentist.AutoSize = true;
             lblDentist.Dock = DockStyle.Fill;
@@ -99,7 +99,7 @@
             lblDentist.Text = "Pracownik";
             lblDentist.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // cbDentist
+            // cbDentysta
             // 
             cbDentist.Dock = DockStyle.Fill;
             cbDentist.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -109,7 +109,7 @@
             cbDentist.Size = new Size(380, 23);
             cbDentist.TabIndex = 3;
             // 
-            // lblService
+            // lblUsluga
             // 
             lblService.AutoSize = true;
             lblService.Dock = DockStyle.Fill;
@@ -120,7 +120,7 @@
             lblService.Text = "Usługa";
             lblService.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // cbService
+            // cbUsluga
             // 
             cbService.Dock = DockStyle.Fill;
             cbService.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -130,7 +130,7 @@
             cbService.Size = new Size(380, 23);
             cbService.TabIndex = 5;
             // 
-            // lblStart
+            // lblData
             // 
             lblStart.AutoSize = true;
             lblStart.Dock = DockStyle.Fill;
@@ -141,7 +141,7 @@
             lblStart.Text = "Data";
             lblStart.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // dtStart
+            // dtData
             // 
             dtStart.CustomFormat = "yyyy-MM-dd HH:mm";
             dtStart.Dock = DockStyle.Fill;
@@ -152,7 +152,7 @@
             dtStart.Size = new Size(380, 23);
             dtStart.TabIndex = 7;
             // 
-            // panelButtons
+            // buttony
             // 
             panelButtons.Controls.Add(btnOk);
             panelButtons.Controls.Add(btnCancel);
@@ -164,7 +164,7 @@
             panelButtons.Size = new Size(491, 30);
             panelButtons.TabIndex = 1;
             // 
-            // btnOk
+            // btnPotwierdz
             // 
             btnOk.Location = new Point(422, 2);
             btnOk.Margin = new Padding(3, 2, 3, 2);
@@ -175,7 +175,7 @@
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
-            // btnCancel
+            // btnAnuluj
             // 
             btnCancel.DialogResult = DialogResult.Cancel;
             btnCancel.Location = new Point(350, 2);

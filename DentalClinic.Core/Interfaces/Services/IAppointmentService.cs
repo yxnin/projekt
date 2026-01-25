@@ -8,11 +8,11 @@ public interface IAppointmentService
     Task<Appointment?> GetAsync(int id, CancellationToken ct = default);
     Task<List<Appointment>> GetAllAsync(CancellationToken ct = default);
 
-    // Interpreter: filtr tekstowy
+    // interpreter filtr tekstowy
     Task<List<Appointment>> GetFilteredAsync(string? filterText, CancellationToken ct = default);
 
     Task CancelAsync(int id, CancellationToken ct = default);
 
-    // NOWE: oznacz wizytę jako wykonaną
+    // oznaczenie jako wykonana wizyta
     Task MarkDoneAsync(int id, CancellationToken ct = default);
 }

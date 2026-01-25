@@ -134,7 +134,7 @@ public partial class UserAppointmentsForm : Form
     {
         if (gridAppointments.Columns.Count == 0) return;
 
-        // Nagłówki po polsku (DTO AppointmentListItem)
+        // polskie naglowki
         if (gridAppointments.Columns.Contains("StartUtc"))
             gridAppointments.Columns["StartUtc"].HeaderText = "Termin (UTC)";
 
@@ -153,12 +153,11 @@ public partial class UserAppointmentsForm : Form
         if (gridAppointments.Columns.Contains("DurationMinutes"))
             gridAppointments.Columns["DurationMinutes"].HeaderText = "Czas (min)";
 
-        // Ukryj dane techniczne / zbędne dla pacjenta
+        // ukrycie zbędnych
         if (gridAppointments.Columns.Contains("AppointmentId"))
         {
             gridAppointments.Columns["AppointmentId"].HeaderText = "ID wizyty";
-            // jeśli chcesz ukryć ID całkiem:
-            // gridAppointments.Columns["AppointmentId"].Visible = false;
+            
         }
 
         if (gridAppointments.Columns.Contains("PatientId"))

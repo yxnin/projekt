@@ -74,13 +74,13 @@
             this.table.Size = new System.Drawing.Size(520, 238);
 
             // labels
-            this.lblEmail.Text = "Email"; this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblEmail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPassword.Text = "Password"; this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPassword2.Text = "Confirm"; this.lblPassword2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPassword2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFirst.Text = "First name"; this.lblFirst.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblFirst.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLast.Text = "Last name"; this.lblLast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblLast.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPhone.Text = "Phone"; this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPhone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBirth.Text = "Birth date"; this.lblBirth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblBirth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblEmail.Text = "E-mail"; this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblEmail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPassword.Text = "Hasło"; this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPassword2.Text = "Powtórz hasło"; this.lblPassword2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPassword2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFirst.Text = "Imię"; this.lblFirst.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblLast.Text = "Nazwisko"; this.lblLast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblLast.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPhone.Text = "Numer telefonu"; this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBirth.Text = "Data urodzenia"; this.lblBirth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft; this.lblBirth.Dock = System.Windows.Forms.DockStyle.Fill;
 
             // textboxes
             this.tbEmail.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -100,7 +100,7 @@
             this.dtBirth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtBirth.ShowCheckBox = true;
 
-            // add controls to table
+            // dodanie kontrolek
             this.table.Controls.Add(this.lblEmail, 0, 0);
             this.table.Controls.Add(this.tbEmail, 1, 0);
 
@@ -160,7 +160,7 @@
             this.Name = "RegisterForm";
             this.Padding = new System.Windows.Forms.Padding(12);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Register";
+            this.Text = "Zarejestruj";
 
             this.table.ResumeLayout(false);
             this.table.PerformLayout();

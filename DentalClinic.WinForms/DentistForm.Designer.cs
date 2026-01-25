@@ -43,7 +43,7 @@
             this.panelTop.Size = new System.Drawing.Size(900, 50);
             this.panelTop.TabIndex = 0;
             // 
-            // btnRefresh
+            // btnOdśwież
             // 
             this.btnRefresh.Location = new System.Drawing.Point(8, 9);
             this.btnRefresh.Name = "btnRefresh";
@@ -53,7 +53,7 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // btnAdd
+            // btnDodaj
             // 
             this.btnAdd.Location = new System.Drawing.Point(118, 9);
             this.btnAdd.Name = "btnAdd";
@@ -63,7 +63,7 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnEdit
+            // btnEdytuj
             // 
             this.btnEdit.Location = new System.Drawing.Point(228, 9);
             this.btnEdit.Name = "btnEdit";
@@ -73,7 +73,7 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnDelete
+            // btnUsuń
             // 
             this.btnDelete.Location = new System.Drawing.Point(338, 9);
             this.btnDelete.Name = "btnDelete";

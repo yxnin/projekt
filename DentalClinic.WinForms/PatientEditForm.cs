@@ -53,7 +53,7 @@ public partial class PatientEditForm : Form
 
         if (string.IsNullOrWhiteSpace(Result.FirstName) || string.IsNullOrWhiteSpace(Result.LastName))
         {
-            MessageBox.Show("First name and last name are required.", "Validation",
+            MessageBox.Show("Imię i nazwisko jest wymagane.", "Validation",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             DialogResult = DialogResult.None;
         }

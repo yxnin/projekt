@@ -5,15 +5,7 @@ using DentalClinic.Core.Interfaces.Patterns;
 
 namespace DentalClinic.Core.Patterns;
 
-/// <summary>
-/// Minimalny Interpreter filtrów wizyt, kompatybilny z EF.
-/// Obsługa:
-/// - status=Scheduled
-/// - dentistId=3
-/// - patientId=2
-/// - date>=2026-01-01 (StartUtc)
-/// - łączenie: AND
-/// </summary>
+
 public static class AppointmentFilterParser
 {
     public static IAppointmentFilter Parse(string? input)

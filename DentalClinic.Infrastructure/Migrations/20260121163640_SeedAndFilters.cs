@@ -4,10 +4,10 @@
 
 namespace DentalClinic.Infrastructure.Migrations
 {
-    /// <inheritdoc />
+    
     public partial class SeedAndFilters : Migration
     {
-        /// <inheritdoc />
+        
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
@@ -47,7 +47,7 @@ namespace DentalClinic.Infrastructure.Migrations
                 onDelete: ReferentialAction.Restrict);
         }
 
-        /// <inheritdoc />
+        
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

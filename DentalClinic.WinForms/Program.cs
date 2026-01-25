@@ -28,31 +28,31 @@ internal static class Program
                 services.AddDbContext<DentalClinicDbContext>(opt =>
                     opt.UseSqlite("Data Source=dentalclinic.db"));
 
-                // Repo
+                // repo
                 services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
-                // Singleton session
+                // singleton 
                 services.AddSingleton<AppSession>();
 
-                // Serwisy domenowe
+                // serwisy domenowe
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddScoped<IPatientService, PatientService>();
                 services.AddScoped<IDentistService, DentistService>();
                 services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
                 services.AddScoped<IAppointmentService, AppointmentService>();
 
-                // Read service + mediator
+                // read service + mediator
                 services.AddScoped<IAppointmentReadService, AppointmentReadService>();
                 services.AddScoped<IClinicMediator, ClinicMediator>();
 
-                // Simple Factory
+                // simple Factory
                 services.AddSingleton<UiCommandFactory>();
 
-                // Abstract Factory: raporty (MUSI BYĆ transient/scoped, NIE singleton)
+                // abstract Factory
                 services.AddTransient<IAppointmentReportFactory, TxtAppointmentReportFactory>();
                 services.AddTransient<IAppointmentReportFactory, JsonAppointmentReportFactory>();
 
-                // Formy
+                // formy
                 services.AddTransient<MainForm>();
                 services.AddTransient<LoginForm>();
 
@@ -64,15 +64,15 @@ internal static class Program
 
                 services.AddTransient<ServicesForm>();
                 services.AddTransient<ServiceEditForm>();
-
+                
                 services.AddTransient<AppointmentsForm>();
                 services.AddTransient<AppointmentCreateForm>();
 
-                // Panel usera
+                // panel usera
                 services.AddTransient<UserAppointmentsForm>();
                 services.AddTransient<UserAppointmentCreateForm>();
 
-                // Rejestracja z danymi pacjenta
+                // rejestracja z danymi pacjenta
                 services.AddTransient<RegisterPatientForm>();
 
                 services.AddTransient<RegisterForm>();
